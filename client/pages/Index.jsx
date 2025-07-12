@@ -2,19 +2,25 @@ import { useState, useMemo } from "react";
 import { mockEmployees, departments, roles } from "../../shared/employee.js";
 
 export default function EmployeeDirectory() {
+  // Initialize state for employee list and UI controls
   const [staff, setStaff] = useState(mockEmployees);
-  const [query, setQuery] = useState("");
-  const [sortOption, setSortOption] = useState("--Select--");
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
-  const [filterPanel, setFilterPanel] = useState(false);
+  const [query, setQuery] = useState(""); // Search input
+  const [sortOption, setSortOption] = useState("--Select--"); // Sorting field
+  const [limit, setLimit] = useState(10); // Items per page
+  const [page, setPage] = useState(1); // Current page for pagination
+  const [filterPanel, setFilterPanel] = useState(false); // Show/hide filter panel
+
+  // Filter input fields
   const [filterInputs, setFilterInputs] = useState({
     firstName: "",
     department: "",
     role: "",
   });
-  const [showModal, setShowModal] = useState(false);
-  const [editable, setEditable] = useState(null);
+
+  const [showModal, setShowModal] = useState(false); // Modal for add/edit
+  const [editable, setEditable] = useState(null); // Employee being edited
+
+  // Form data for employee
   const [employeeForm, setEmployeeForm] = useState({
     firstName: "",
     lastName: "",
@@ -23,6 +29,7 @@ export default function EmployeeDirectory() {
     role: "",
   });
 
+  // Compute filtered, searched, and sorted employees
   const visibleEmployees = useMemo(() => {
     let result = staff.filter((emp) => {
       const matchesQuery =
@@ -43,6 +50,7 @@ export default function EmployeeDirectory() {
       return matchesQuery && matchesFilters;
     });
 
+    // Sort by selected field
     if (sortOption === "firstName") {
       result.sort((a, b) => a.firstName.localeCompare(b.firstName));
     } else if (sortOption === "department") {
@@ -52,16 +60,19 @@ export default function EmployeeDirectory() {
     return result;
   }, [staff, query, filterInputs, sortOption]);
 
+  // Pagination logic
   const total = Math.ceil(visibleEmployees.length / limit);
   const from = (page - 1) * limit;
   const currentItems = visibleEmployees.slice(from, from + limit);
 
+  // Delete employee from list
   const removeEmployee = (id) => {
     if (confirm("Are you sure you want to delete this employee?")) {
       setStaff(staff.filter((emp) => emp.id !== id));
     }
   };
 
+  // Prepare form for editing selected employee
   const editEmployee = (emp) => {
     setEditable(emp);
     setEmployeeForm({
@@ -74,6 +85,7 @@ export default function EmployeeDirectory() {
     setShowModal(true);
   };
 
+  // Open empty form to add new employee
   const openAddForm = () => {
     setEditable(null);
     setEmployeeForm({
@@ -86,14 +98,17 @@ export default function EmployeeDirectory() {
     setShowModal(true);
   };
 
+  // Submit form to save or update employee
   const submitForm = () => {
     if (editable) {
+      // Update existing employee
       setStaff(
         staff.map((emp) =>
           emp.id === editable.id ? { ...emp, ...employeeForm } : emp
         )
       );
     } else {
+      // Add new employee with next available ID
       const newEmp = {
         id: Math.max(...staff.map((e) => e.id)) + 1,
         ...employeeForm,
@@ -103,11 +118,13 @@ export default function EmployeeDirectory() {
     setShowModal(false);
   };
 
+  // Apply filters and reset pagination
   const applyFilterChanges = () => {
     setPage(1);
     setFilterPanel(false);
   };
 
+  // Clear all filters and reset pagination
   const clearFilters = () => {
     setFilterInputs({ firstName: "", department: "", role: "" });
     setPage(1);
@@ -115,6 +132,7 @@ export default function EmployeeDirectory() {
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#f9fafb" }}>
+      {/* Header Section */}
       <header className="header">
         <div className="header-container">
           <h1 className="header-title">Employee Directory</h1>
@@ -134,8 +152,10 @@ export default function EmployeeDirectory() {
       </header>
 
       <div className="main-container">
+        {/* Content Section */}
         <div className={`content-area ${filterPanel ? "with-filter" : ""}`}>
           <div className="controls">
+            {/* Sorting and pagination controls */}
             <div className="controls-left">
               <div className="control-group">
                 <span className="control-label">Sort:</span>
@@ -168,6 +188,7 @@ export default function EmployeeDirectory() {
             </button>
           </div>
 
+          {/* Employee List */}
           <div className="employee-grid">
             {currentItems.map((emp) => (
               <div key={emp.id} className="employee-card">
@@ -197,6 +218,7 @@ export default function EmployeeDirectory() {
             ))}
           </div>
 
+          {/* Pagination Controls */}
           <div className="pagination">
             <button
               className="pagination-button"
@@ -218,6 +240,7 @@ export default function EmployeeDirectory() {
           </div>
         </div>
 
+        {/* Filter Sidebar Panel */}
         {filterPanel && (
           <div className="filter-sidebar">
             <h3 className="filter-title">Filter Employees</h3>
@@ -290,10 +313,12 @@ export default function EmployeeDirectory() {
         )}
       </div>
 
+      {/* Footer Section */}
       <footer className="footer">
         <p className="footer-text">© 2025 Dibya Devs. All rights reserved.</p>
       </footer>
 
+      {/* Add/Edit Modal */}
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
