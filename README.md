@@ -88,18 +88,15 @@ Employee-Management/
 git clone https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface.git
 2️⃣ Navigate to the Project Directory
 bash
-Copy
-Edit
+
 cd employee-management
 3️⃣ Install Dependencies
 bash
-Copy
-Edit
+
 npm install
 4️⃣ Start the Development Server
 bash
-Copy
-Edit
+
 npm run dev
 📌 Project Insights
 State is managed entirely on the client side using React hooks
@@ -143,9 +140,6 @@ GitHub: https://github.com/dibyaranajnsahoo1
 📝 License
 This project is open-source and available under the MIT License.
 
-python
-Copy
-Edit
 
 ---
 
