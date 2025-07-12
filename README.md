@@ -138,7 +138,7 @@ Backend support using Express.js + MongoDB
 
 👨‍💻 Author
 Developed with 💙 by Dibya
-GitHub: https://github.com/yourusername
+GitHub: https://github.com/dibyaranajnsahoo1
 
 📝 License
 This project is open-source and available under the MIT License.
