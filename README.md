@@ -80,6 +80,14 @@ Employee-Management/
 
 ---
 
+## 📸 Screenshots
+
+![Screenshot 1](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/Screenshot%202025-07-12%20121717.png?raw=true)
+![Screenshot 2](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/Screenshot%202025-07-12%20121731.png?raw=true)
+![Screenshot 3](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/Screenshot%202025-07-12%20121740.png?raw=true)
+
+---
+
 ## ⚙️ How to Run Locally
 
 ### 1️⃣ Clone the Repository
