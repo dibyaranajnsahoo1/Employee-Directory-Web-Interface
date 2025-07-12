@@ -4,30 +4,34 @@ A modern and responsive web application built to manage employee records with ea
 
 ---
 
-## 📂 Project Structure
-
+## 📁 Project Structure
+```
 Employee-Management/
 ├── client/
-│ ├── pages/ # Main page components (e.g., Home, NotFound)
-│ ├── App.jsx # Core app component
-│ ├── styles.css # Global CSS styles
+│ ├── pages/
+│ ├── App.jsx
+│ ├── styles.css
 ├── public/
-│ ├── placeholder.svg # Default image asset
-│ ├── robots.txt # SEO-related config
+│ ├── placeholder.svg
+│ ├── robots.txt
 ├── shared/
-│ ├── employee.js # Static mock employee data
-├── index.html # Entry HTML
-├── vite.config.js # Vite config file
+│ ├── employee.js
+├── index.html
+├── .dockerignore
 ├── .gitignore
 ├── .prettierrc
-├── .dockerignore
 ├── package.json
 ├── package-lock.json
+├── vite.config.js
+```
+- `client/pages/`: Components for different views (index.js, Notfound.js).
+- `public/`: Static assets (icons, images, metadata files).
+- `shared/employee.js`: JavaScript array simulating employee data.
+- `App.jsx`: Main application logic and rendering.
+- `styles.css`: Centralized styling for layout and components.
+- `index.html`: Entry point for the application.
 
-yaml
-Copy
-Edit
-
+---
 ---
 
 ## ✨ Key Features
