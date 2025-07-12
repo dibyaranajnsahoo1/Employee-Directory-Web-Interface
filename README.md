@@ -1,4 +1,4 @@
-# 👥 Employee Management System
+# 👥 Employee Directory Web Interface
 
 A modern and responsive web application built to manage employee records with ease. This single-page application allows you to create, edit, delete, filter, sort, search, and paginate employee data — all from the browser, without a backend.
 
