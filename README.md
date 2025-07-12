@@ -85,7 +85,7 @@ Employee-Management/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone [https://github.com/yourusername/employee-management.git]
+git clone https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface.git
 2️⃣ Navigate to the Project Directory
 bash
 Copy
