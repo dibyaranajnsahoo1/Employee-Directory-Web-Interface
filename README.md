@@ -148,15 +148,5 @@ Component logic and UI cleanly organized and maintainable
 Developed with 💙 by Dibya
 GitHub: https://github.com/dibyaranajnsahoo1
 
-📝 License
-This project is open-source and available under the MIT License.
-
-
----
-
-Let me know if you'd like to:
-- Replace `yourusername` with your GitHub username or custom repo URL
-- Add preview screenshots or deploy link (like from Vercel)
-- Add badges (like build status, license, etc.)
 
 I'm here to help polish it more if needed!
