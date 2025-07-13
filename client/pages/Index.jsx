@@ -1,26 +1,25 @@
-import { useState, useMemo } from "react";
+
+
+import { useState, useMemo, useEffect } from "react";
 import { mockEmployees, departments, roles } from "../../shared/employee.js";
 
 export default function EmployeeDirectory() {
-  // Initialize state for employee list and UI controls
-  const [staff, setStaff] = useState(mockEmployees);
-  const [query, setQuery] = useState(""); // Search input
-  const [sortOption, setSortOption] = useState("--Select--"); // Sorting field
-  const [limit, setLimit] = useState(10); // Items per page
-  const [page, setPage] = useState(1); // Current page for pagination
-  const [filterPanel, setFilterPanel] = useState(false); // Show/hide filter panel
+  const [staff, setStaff] = useState([]);
+  const [query, setQuery] = useState("");
+  const [sortOption, setSortOption] = useState("--Select--");
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const [filterPanel, setFilterPanel] = useState(false);
 
-  // Filter input fields
   const [filterInputs, setFilterInputs] = useState({
     firstName: "",
     department: "",
     role: "",
   });
 
-  const [showModal, setShowModal] = useState(false); // Modal for add/edit
-  const [editable, setEditable] = useState(null); // Employee being edited
+  const [showModal, setShowModal] = useState(false);
+  const [editable, setEditable] = useState(null);
 
-  // Form data for employee
   const [employeeForm, setEmployeeForm] = useState({
     firstName: "",
     lastName: "",
@@ -29,7 +28,21 @@ export default function EmployeeDirectory() {
     role: "",
   });
 
-  // Compute filtered, searched, and sorted employees
+  // Load from localStorage or fallback to mockEmployees
+  useEffect(() => {
+    const saved = localStorage.getItem("employees");
+    if (saved) {
+      setStaff(JSON.parse(saved));
+    } else {
+      setStaff(mockEmployees);
+    }
+  }, []);
+
+  // Save to localStorage whenever staff changes
+  useEffect(() => {
+    localStorage.setItem("employees", JSON.stringify(staff));
+  }, [staff]);
+
   const visibleEmployees = useMemo(() => {
     let result = staff.filter((emp) => {
       const matchesQuery =
@@ -50,7 +63,6 @@ export default function EmployeeDirectory() {
       return matchesQuery && matchesFilters;
     });
 
-    // Sort by selected field
     if (sortOption === "firstName") {
       result.sort((a, b) => a.firstName.localeCompare(b.firstName));
     } else if (sortOption === "department") {
@@ -60,19 +72,16 @@ export default function EmployeeDirectory() {
     return result;
   }, [staff, query, filterInputs, sortOption]);
 
-  // Pagination logic
   const total = Math.ceil(visibleEmployees.length / limit);
   const from = (page - 1) * limit;
   const currentItems = visibleEmployees.slice(from, from + limit);
 
-  // Delete employee from list
   const removeEmployee = (id) => {
     if (confirm("Are you sure you want to delete this employee?")) {
       setStaff(staff.filter((emp) => emp.id !== id));
     }
   };
 
-  // Prepare form for editing selected employee
   const editEmployee = (emp) => {
     setEditable(emp);
     setEmployeeForm({
@@ -85,7 +94,6 @@ export default function EmployeeDirectory() {
     setShowModal(true);
   };
 
-  // Open empty form to add new employee
   const openAddForm = () => {
     setEditable(null);
     setEmployeeForm({
@@ -98,33 +106,55 @@ export default function EmployeeDirectory() {
     setShowModal(true);
   };
 
-  // Submit form to save or update employee
+  const resetForm = () => {
+    setEmployeeForm({
+      firstName: "",
+      lastName: "",
+      email: "",
+      department: "",
+      role: "",
+    });
+    setEditable(null);
+  };
+
   const submitForm = () => {
+    const { firstName, email, department, role } = employeeForm;
+
+    // Basic validation
+    if (!firstName || !email || !department || !role) {
+      alert("Please fill all required fields.");
+      return;
+    }
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     if (editable) {
-      // Update existing employee
       setStaff(
         staff.map((emp) =>
           emp.id === editable.id ? { ...emp, ...employeeForm } : emp
         )
       );
     } else {
-      // Add new employee with next available ID
       const newEmp = {
-        id: Math.max(...staff.map((e) => e.id)) + 1,
+        id: Math.max(...staff.map((e) => e.id), 0) + 1,
         ...employeeForm,
       };
       setStaff([...staff, newEmp]);
     }
+
     setShowModal(false);
+    resetForm();
   };
 
-  // Apply filters and reset pagination
   const applyFilterChanges = () => {
     setPage(1);
     setFilterPanel(false);
   };
 
-  // Clear all filters and reset pagination
   const clearFilters = () => {
     setFilterInputs({ firstName: "", department: "", role: "" });
     setPage(1);
@@ -132,7 +162,7 @@ export default function EmployeeDirectory() {
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#f9fafb" }}>
-      {/* Header Section */}
+      {/* Header */}
       <header className="header">
         <div className="header-container">
           <h1 className="header-title">Employee Directory</h1>
@@ -151,11 +181,10 @@ export default function EmployeeDirectory() {
         </div>
       </header>
 
+      {/* Main Content */}
       <div className="main-container">
-        {/* Content Section */}
         <div className={`content-area ${filterPanel ? "with-filter" : ""}`}>
           <div className="controls">
-            {/* Sorting and pagination controls */}
             <div className="controls-left">
               <div className="control-group">
                 <span className="control-label">Sort:</span>
@@ -218,7 +247,7 @@ export default function EmployeeDirectory() {
             ))}
           </div>
 
-          {/* Pagination Controls */}
+          {/* Pagination */}
           <div className="pagination">
             <button
               className="pagination-button"
@@ -240,17 +269,14 @@ export default function EmployeeDirectory() {
           </div>
         </div>
 
-        {/* Filter Sidebar Panel */}
+        {/* Filter Sidebar */}
         {filterPanel && (
           <div className="filter-sidebar">
             <h3 className="filter-title">Filter Employees</h3>
             <div>
               <div className="filter-group">
-                <label className="filter-label" htmlFor="filter-firstName">
-                  First Name
-                </label>
+                <label className="filter-label">First Name</label>
                 <input
-                  id="filter-firstName"
                   className="filter-input"
                   value={filterInputs.firstName}
                   onChange={(e) =>
@@ -259,11 +285,8 @@ export default function EmployeeDirectory() {
                 />
               </div>
               <div className="filter-group">
-                <label className="filter-label" htmlFor="filter-department">
-                  Department
-                </label>
+                <label className="filter-label">Department</label>
                 <select
-                  id="filter-department"
                   className="filter-select"
                   value={filterInputs.department}
                   onChange={(e) =>
@@ -280,11 +303,8 @@ export default function EmployeeDirectory() {
                 </select>
               </div>
               <div className="filter-group">
-                <label className="filter-label" htmlFor="filter-role">
-                  Role
-                </label>
+                <label className="filter-label">Role</label>
                 <select
-                  id="filter-role"
                   className="filter-select"
                   value={filterInputs.role}
                   onChange={(e) =>
@@ -313,23 +333,23 @@ export default function EmployeeDirectory() {
         )}
       </div>
 
-      {/* Footer Section */}
+      {/* Footer */}
       <footer className="footer">
         <p className="footer-text">© 2025 Dibya Devs. All rights reserved.</p>
       </footer>
 
-      {/* Add/Edit Modal */}
+      {/* Modal */}
       {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+        <div className="modal-overlay" onClick={() => {
+          setShowModal(false);
+          resetForm();
+        }}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2 className="modal-title">{editable ? "Edit Employee" : "Add Employee"}</h2>
             <div>
               <div className="form-group">
-                <label className="form-label" htmlFor="firstName">
-                  First name
-                </label>
+                <label className="form-label">First name</label>
                 <input
-                  id="firstName"
                   className="form-input"
                   value={employeeForm.firstName}
                   onChange={(e) =>
@@ -338,11 +358,8 @@ export default function EmployeeDirectory() {
                 />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="lastName">
-                  Last name
-                </label>
+                <label className="form-label">Last name</label>
                 <input
-                  id="lastName"
                   className="form-input"
                   value={employeeForm.lastName}
                   onChange={(e) =>
@@ -352,11 +369,8 @@ export default function EmployeeDirectory() {
               </div>
               <div className="form-group-row">
                 <div>
-                  <label className="form-label" htmlFor="email">
-                    Email
-                  </label>
+                  <label className="form-label">Email</label>
                   <input
-                    id="email"
                     type="email"
                     className="form-input"
                     value={employeeForm.email}
@@ -366,11 +380,8 @@ export default function EmployeeDirectory() {
                   />
                 </div>
                 <div>
-                  <label className="form-label" htmlFor="department">
-                    Department
-                  </label>
+                  <label className="form-label">Department</label>
                   <select
-                    id="department"
                     className="form-select"
                     value={employeeForm.department}
                     onChange={(e) =>
@@ -387,11 +398,8 @@ export default function EmployeeDirectory() {
                 </div>
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="role">
-                  Role
-                </label>
+                <label className="form-label">Role</label>
                 <select
-                  id="role"
                   className="form-select"
                   value={employeeForm.role}
                   onChange={(e) =>
@@ -407,7 +415,13 @@ export default function EmployeeDirectory() {
                 </select>
               </div>
               <div className="modal-actions">
-                <button className="modal-cancel" onClick={() => setShowModal(false)}>
+                <button
+                  className="modal-cancel"
+                  onClick={() => {
+                    setShowModal(false);
+                    resetForm();
+                  }}
+                >
                   Cancel
                 </button>
                 <button onClick={submitForm} className="modal-save">
