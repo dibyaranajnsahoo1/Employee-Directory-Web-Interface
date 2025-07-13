@@ -86,9 +86,9 @@ Employee-Management/
 
 ## 📸 Screenshots
 
-![Screenshot 1](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/screenshots/Screenshot1.png?raw=true)
-![Screenshot 2](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/screenshots/Screenshot2.png?raw=true)
-![Screenshot 3](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/screenshots/Screenshot3.png?raw=true)
+![Screenshot 1](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/screenshots/Screenshot1.png)
+![Screenshot 2](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/screenshots/Screenshot2.png)
+![Screenshot 3](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/screenshots/Screenshot3.png)
 
 > Replace the above image paths if your repo path or folder names differ
 
