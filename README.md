@@ -119,8 +119,6 @@ Component logic and UI cleanly organized and maintainable
 🔮 Future Improvements
 🌐 Backend integration using Express.js + MongoDB
 
-📦 Export to CSV or Excel
-
 🧪 Unit testing with Jest or Vitest
 
 🚀 Deployment on Vercel or Netlify
