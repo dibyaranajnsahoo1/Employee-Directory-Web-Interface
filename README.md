@@ -101,19 +101,10 @@ Employee-Management/
 ```bash
 git clone https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface.git
 2️⃣ Navigate to the Project Directory
-bash
-Copy
-Edit
 cd Employee-Directory-Web-Interface
 3️⃣ Install Dependencies
-bash
-Copy
-Edit
 npm install
 4️⃣ Start the Development Server
-bash
-Copy
-Edit
 npm run dev
 Open http://localhost:5173 in your browser.
 
