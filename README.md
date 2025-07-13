@@ -9,11 +9,12 @@ A modern and responsive web application built to manage employee records with ea
 Employee-Management/
 ├── client/
 │ ├── pages/
+│       ├── index.jsx
+│       ├── Notfound.jsx
 │ ├── App.jsx
 │ ├── styles.css
 ├── public/
 │ ├── placeholder.svg
-│ ├── robots.txt
 ├── shared/
 │ ├── employee.js
 ├── index.html
