@@ -38,33 +38,36 @@ Employee-Management/
 ## ✨ Key Features
 
 ### 🔹 Employee Dashboard
-- Browse employees in a card-based layout
-- Edit or delete records using intuitive buttons
-- Clean and responsive design
+- View all employees in a clean card-based layout
+- Edit and delete records with intuitive controls
 
 ### 🧾 Add & Edit Functionality
-- Add new employee records via a modal form
+- Add new employee records via modal
 - Pre-filled data for editing
-- Cancel button to discard unsaved changes
+- Cancel resets form and closes modal
+
+### ✅ Form Validation
+- Required field checks (first name, email, department, role)
+- Email format validation
+
+### 💾 Persistent Storage
+- Data saved in `localStorage`
+- Automatically restores previous session data
 
 ### 🔍 Search, Filter & Sort
 - Real-time search by name or email
 - Filter by department, role, or name
-- Sort options: First Name and Department
+- Sort by First Name or Department
 - Combined search + filter for refined results
 
 ### 📄 Pagination Controls
-- Selectable items per page (10 / 25 / 50 / 100)
-- Navigation with dynamic rendering
-- Responsive pagination that adapts to filtered data
+- Dynamic items per page (10 / 25 / 50 / 100)
+- Next / Previous page navigation
+- Pagination adapts to search/filter results
 
 ### 📱 Fully Responsive UI
-- Mobile-friendly design with flexible layouts
-- Built with media queries and component scaling
-
-### 💾 No Backend Required
-- Uses in-memory static data (`employee.js`)
-- Perfect for demos or internal tools
+- Mobile-friendly layout with component scaling
+- Optimized for all screen sizes
 
 ---
 
@@ -72,20 +75,22 @@ Employee-Management/
 
 | Tech            | Purpose                             |
 |-----------------|-------------------------------------|
-| **React.js**    | UI building and dynamic rendering   |
-| **Vite**        | Fast dev server & build tool        |
-| **JavaScript**  | App logic & state management        |
-| **CSS**         | Styling and responsive layout       |
-| **HTML5**       | Semantic markup                     |
-| **SVG**         | Placeholder assets                  |
+| **React.js**    | UI and state management             |
+| **Vite**        | Lightning-fast development build    |
+| **JavaScript**  | Logic and functionality             |
+| **CSS**         | Styling and responsive design       |
+| **HTML5**       | Semantic layout                     |
+| **SVG**         | Placeholder and icons               |
 
 ---
 
 ## 📸 Screenshots
 
-![Screenshot 1](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/Screenshot%202025-07-12%20121717.png?raw=true)
-![Screenshot 2](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/Screenshot%202025-07-12%20121731.png?raw=true)
-![Screenshot 3](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/Screenshot%202025-07-12%20121740.png?raw=true)
+![Screenshot 1](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/screenshots/Screenshot1.png?raw=true)
+![Screenshot 2](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/screenshots/Screenshot2.png?raw=true)
+![Screenshot 3](https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface/blob/main/screenshots/Screenshot3.png?raw=true)
+
+> Replace the above image paths if your repo path or folder names differ
 
 ---
 
@@ -93,44 +98,61 @@ Employee-Management/
 
 ### 1️⃣ Clone the Repository
 
-```
+```bash
 git clone https://github.com/dibyaranajnsahoo1/Employee-Directory-Web-Interface.git
 2️⃣ Navigate to the Project Directory
-cd employee-management
+bash
+Copy
+Edit
+cd Employee-Directory-Web-Interface
 3️⃣ Install Dependencies
+bash
+Copy
+Edit
 npm install
 4️⃣ Start the Development Server
+bash
+Copy
+Edit
 npm run dev
+Open http://localhost:5173 in your browser.
+
 📌 Project Insights
-State is managed entirely on the client side using React hooks
+State is managed fully via React hooks (useState, useMemo, useEffect)
 
-No database or external API is used
+No backend/database required – uses static in-memory data and browser storage
 
-Filter, sort, and pagination are implemented with pure JavaScript logic
+Validation logic for required fields and email format
 
-Clean and reusable component architecture
+Filter, search, sort, pagination – all powered by native JS
 
-Minimal and accessible design for better usability
+Component logic and UI cleanly organized and maintainable
 
 🔮 Future Improvements
-Persistent storage (e.g., localStorage or backend integration)
+🌐 Backend integration using Express.js + MongoDB
 
-Toast notifications or modals for user actions
+📦 Export to CSV or Excel
 
-Better animations and transitions
+🧪 Unit testing with Jest or Vitest
 
-Advanced filtering (e.g., multi-field, date range)
+🚀 Deployment on Vercel or Netlify
 
-Unit testing with Jest or Vitest
+✨ Animation using Framer Motion or CSS transitions
 
-Backend support using Express.js + MongoDB
+🔔 Toast notifications on action feedback
 
 ✅ Project Highlights
-🔄 Full CRUD functionality
+🔄 Full CRUD (Create, Read, Update, Delete)
 
-🔍 Advanced search, filter, and sort logic
+🔍 Real-time search, advanced filter, and sorting
 
-📱 100% responsive on all screen sizes
+💾 Persistent localStorage-backed data saving
+
+🧼 Minimal, clean, and readable codebase
+
+⚡ Powered by modern tools: React + Vite
+
+📱 100% responsive for all devices
 
 🧼 Neatly organized and readable codebase
 
